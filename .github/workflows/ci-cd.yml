@@ -29,9 +29,12 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: ${{ matrix.node }}
+          registry-url: "https://registry.npmjs.org"
 
       - name: "Install dependencies"
         run: npm ci
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
 
       - name: "Run type checking"
         run: npm run typecheck
@@ -112,6 +115,8 @@ jobs:
 
       - name: "Install dependencies"
         run: npm ci
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
 
       - name: "Run tests"
         run: npm test
