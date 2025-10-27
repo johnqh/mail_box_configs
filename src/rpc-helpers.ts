@@ -420,12 +420,14 @@ export class RpcHelpers {
    * Build RPC URL for any supported chain using the specified RPC provider
    *
    * This is a convenience method that routes to the appropriate provider-specific
-   * function based on the endpoint parameter.
+   * function based on the endpoint parameter. If no endpoint is specified, it will
+   * try providers in priority order (Ankr > Metamask > Alchemy) and return the
+   * first available URL.
    *
    * @param apiKeys - API keys for all RPC providers
    * @param chain - Chain identifier from Chain enum
-   * @param endpoint - RPC endpoint provider to use (Alchemy, Ankr, or Metamask)
-   * @returns Complete RPC URL, or undefined if the API key is missing or chain is unsupported by the provider
+   * @param endpoint - Optional RPC endpoint provider to use (Alchemy, Ankr, or Metamask). If not specified, uses priority order: Ankr > Metamask > Alchemy
+   * @returns Complete RPC URL, or undefined if no API keys are available or chain is unsupported by all providers
    *
    * @example
    * ```typescript
@@ -435,6 +437,7 @@ export class RpcHelpers {
    *   metamaskApiKey: 'your-metamask-key'
    * };
    *
+   * // With specific endpoint
    * const alchemyUrl = RpcHelpers.getRpcUrl(apiKeys, Chain.ETH_MAINNET, RpcEndpoint.Alchemy);
    * // Returns: https://eth-mainnet.g.alchemy.com/v2/your-alchemy-key
    *
@@ -444,25 +447,53 @@ export class RpcHelpers {
    * const metamaskUrl = RpcHelpers.getRpcUrl(apiKeys, Chain.ARBITRUM_MAINNET, RpcEndpoint.Metamask);
    * // Returns: https://arbitrum-mainnet.infura.io/v3/your-metamask-key
    *
-   * const unsupportedUrl = RpcHelpers.getRpcUrl(apiKeys, Chain.BASE_MAINNET, RpcEndpoint.Metamask);
-   * // Returns: undefined (Base is not supported by Metamask/Infura)
+   * // Without endpoint - uses priority order
+   * const autoUrl = RpcHelpers.getRpcUrl(apiKeys, Chain.ETH_MAINNET);
+   * // Returns: https://rpc.ankr.com/eth/your-ankr-key (Ankr has highest priority)
+   *
+   * const partialKeys: ApiKeys = {
+   *   alchemyApiKey: 'your-alchemy-key'
+   * };
+   * const fallbackUrl = RpcHelpers.getRpcUrl(partialKeys, Chain.ETH_MAINNET);
+   * // Returns: https://eth-mainnet.g.alchemy.com/v2/your-alchemy-key (falls back to Alchemy)
    * ```
    */
   static getRpcUrl(
     apiKeys: ApiKeys,
     chain: Chain,
-    endpoint: RpcEndpoint
+    endpoint?: RpcEndpoint
   ): Optional<string> {
-    switch (endpoint) {
-      case RpcEndpoint.Alchemy:
-        return this.getAlchemyRpcUrl(apiKeys.alchemyApiKey ?? '', chain);
-      case RpcEndpoint.Ankr:
-        return this.getAnkrRpcUrl(apiKeys.ankrApiKey ?? '', chain);
-      case RpcEndpoint.Metamask:
-        return this.getMetamaskRpcUrl(apiKeys.metamaskApiKey ?? '', chain);
-      default:
-        return undefined;
+    // If endpoint is specified, use that specific provider
+    if (endpoint !== undefined) {
+      switch (endpoint) {
+        case RpcEndpoint.Alchemy:
+          return this.getAlchemyRpcUrl(apiKeys.alchemyApiKey ?? '', chain);
+        case RpcEndpoint.Ankr:
+          return this.getAnkrRpcUrl(apiKeys.ankrApiKey ?? '', chain);
+        case RpcEndpoint.Metamask:
+          return this.getMetamaskRpcUrl(apiKeys.metamaskApiKey ?? '', chain);
+        default:
+          return undefined;
+      }
     }
+
+    // If no endpoint specified, try providers in priority order: Ankr > Metamask > Alchemy
+    const ankrUrl = this.getAnkrRpcUrl(apiKeys.ankrApiKey ?? '', chain);
+    if (ankrUrl) {
+      return ankrUrl;
+    }
+
+    const metamaskUrl = this.getMetamaskRpcUrl(apiKeys.metamaskApiKey ?? '', chain);
+    if (metamaskUrl) {
+      return metamaskUrl;
+    }
+
+    const alchemyUrl = this.getAlchemyRpcUrl(apiKeys.alchemyApiKey ?? '', chain);
+    if (alchemyUrl) {
+      return alchemyUrl;
+    }
+
+    return undefined;
   }
 
   /**

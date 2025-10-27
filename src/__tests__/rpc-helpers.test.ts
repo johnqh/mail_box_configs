@@ -291,6 +291,60 @@ describe('RpcHelpers', () => {
       const url = RpcHelpers.getRpcUrl(apiKeys, Chain.SOLANA_MAINNET, RpcEndpoint.Ankr);
       expect(url).toBe('https://rpc.ankr.com/solana/test-ankr-key');
     });
+
+    it('should use Ankr as highest priority when endpoint is not specified', () => {
+      const apiKeys: ApiKeys = {
+        alchemyApiKey: 'test-alchemy-key',
+        ankrApiKey: 'test-ankr-key',
+        metamaskApiKey: 'test-metamask-key',
+      };
+      const url = RpcHelpers.getRpcUrl(apiKeys, Chain.ETH_MAINNET);
+      expect(url).toBe('https://rpc.ankr.com/eth/test-ankr-key');
+    });
+
+    it('should fallback to Metamask when Ankr is unavailable', () => {
+      const apiKeys: ApiKeys = {
+        alchemyApiKey: 'test-alchemy-key',
+        metamaskApiKey: 'test-metamask-key',
+      };
+      const url = RpcHelpers.getRpcUrl(apiKeys, Chain.ETH_MAINNET);
+      expect(url).toBe('https://mainnet.infura.io/v3/test-metamask-key');
+    });
+
+    it('should fallback to Alchemy when Ankr and Metamask are unavailable', () => {
+      const apiKeys: ApiKeys = {
+        alchemyApiKey: 'test-alchemy-key',
+      };
+      const url = RpcHelpers.getRpcUrl(apiKeys, Chain.ETH_MAINNET);
+      expect(url).toBe('https://eth-mainnet.g.alchemy.com/v2/test-alchemy-key');
+    });
+
+    it('should return undefined when no keys are available and endpoint is not specified', () => {
+      const apiKeys: ApiKeys = {};
+      const url = RpcHelpers.getRpcUrl(apiKeys, Chain.ETH_MAINNET);
+      expect(url).toBeUndefined();
+    });
+
+    it('should fallback correctly when chain is not supported by higher priority providers', () => {
+      const apiKeys: ApiKeys = {
+        alchemyApiKey: 'test-alchemy-key',
+        ankrApiKey: 'test-ankr-key',
+        metamaskApiKey: 'test-metamask-key',
+      };
+      // BASE_MAINNET is not supported by Metamask, so it should use Ankr
+      const url = RpcHelpers.getRpcUrl(apiKeys, Chain.BASE_MAINNET);
+      expect(url).toBe('https://rpc.ankr.com/base/test-ankr-key');
+    });
+
+    it('should fallback correctly for chains not supported by Ankr or Metamask', () => {
+      const apiKeys: ApiKeys = {
+        alchemyApiKey: 'test-alchemy-key',
+        metamaskApiKey: 'test-metamask-key',
+      };
+      // MONAD_MAINNET is only supported by none, but we should still return undefined
+      const url = RpcHelpers.getRpcUrl(apiKeys, Chain.MONAD_MAINNET);
+      expect(url).toBeUndefined();
+    });
   });
 
   describe('getExplorerApiUrl', () => {
