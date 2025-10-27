@@ -9,5 +9,5 @@
  */
 
 // Export RPC helpers and related types
-export { RpcHelpers } from './rpc-helpers';
-export type { BlockchainApis, ChainInfo } from './rpc-helpers';
+export { RpcHelpers, RpcEndpoint } from './rpc-helpers';
+export type { BlockchainApis, ApiKeys, ChainInfo } from './rpc-helpers';
