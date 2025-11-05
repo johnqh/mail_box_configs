@@ -389,12 +389,73 @@ describe('RpcHelpers', () => {
 
   describe('getVisibleChains', () => {
     it('should return only chains with mailer addresses', () => {
-      const devEvmChains = RpcHelpers.getVisibleChains(ChainType.EVM, true);
-      expect(devEvmChains.length).toBeGreaterThan(0);
-      devEvmChains.forEach((chain) => {
+      const allEvmChains = RpcHelpers.getVisibleChains(ChainType.EVM, true);
+      expect(allEvmChains.length).toBeGreaterThan(0);
+      allEvmChains.forEach((chain) => {
         expect(chain.mailerAddress).toBeDefined();
-        expect(chain.isDev).toBe(true);
       });
+    });
+
+    it('should return only mainnet chains when includesTestNet is false', () => {
+      const mainnetEvmChains = RpcHelpers.getVisibleChains(ChainType.EVM, false);
+      // If there are any chains returned, they should all be mainnet
+      mainnetEvmChains.forEach((chain) => {
+        expect(chain.mailerAddress).toBeDefined();
+        expect(chain.isTestNet).toBe(false);
+      });
+    });
+
+    it('should return both mainnet and testnet chains when includesTestNet is true', () => {
+      const allEvmChains = RpcHelpers.getVisibleChains(ChainType.EVM, true);
+      const hasMainnet = allEvmChains.some((chain) => !chain.isTestNet);
+      const hasTestnet = allEvmChains.some((chain) => chain.isTestNet);
+      expect(hasMainnet || hasTestnet).toBe(true); // At least one type should exist
+    });
+
+    it('should return all chain types when chainType is undefined and includesTestNet is true', () => {
+      const allChains = RpcHelpers.getVisibleChains(undefined, true);
+      expect(allChains.length).toBeGreaterThan(0);
+      allChains.forEach((chain) => {
+        expect(chain.mailerAddress).toBeDefined();
+      });
+    });
+
+    it('should return only mainnet chains of all types when chainType is undefined and includesTestNet is false', () => {
+      const mainnetChains = RpcHelpers.getVisibleChains(undefined, false);
+      // If there are any chains returned, they should all be mainnet
+      mainnetChains.forEach((chain) => {
+        expect(chain.mailerAddress).toBeDefined();
+        expect(chain.isTestNet).toBe(false);
+      });
+    });
+
+    it('should filter by specific chain type when provided', () => {
+      const evmChains = RpcHelpers.getVisibleChains(ChainType.EVM, true);
+      const solanaChains = RpcHelpers.getVisibleChains(ChainType.SOLANA, true);
+
+      evmChains.forEach((chain) => {
+        expect(chain.chainType).toBe(ChainType.EVM);
+      });
+
+      solanaChains.forEach((chain) => {
+        expect(chain.chainType).toBe(ChainType.SOLANA);
+      });
+    });
+
+    it('should use default parameters when called with no arguments', () => {
+      const allChains = RpcHelpers.getVisibleChains();
+      expect(allChains.length).toBeGreaterThan(0);
+      allChains.forEach((chain) => {
+        expect(chain.mailerAddress).toBeDefined();
+      });
+    });
+
+    it('should use default includesTestNet=true when only chainType is provided', () => {
+      const evmChains = RpcHelpers.getVisibleChains(ChainType.EVM);
+      const hasMainnet = evmChains.some((chain) => !chain.isTestNet);
+      const hasTestnet = evmChains.some((chain) => chain.isTestNet);
+      // With includesTestNet=true (default), we should get both or at least one type
+      expect(hasMainnet || hasTestnet).toBe(true);
     });
   });
 

@@ -22,7 +22,7 @@ export const CHAIN_INFO_MAP: Record<Chain, ChainInfo> = {
     explorerDomain: 'api.etherscan.io',
     explorerBrowserDomain: 'etherscan.io',
     usdcAddress: '0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48',
-    isDev: false,
+    isTestNet: false,
   },
   [Chain.ETH_SEPOLIA]: {
     chainType: ChainType.EVM,
@@ -34,7 +34,7 @@ export const CHAIN_INFO_MAP: Record<Chain, ChainInfo> = {
     explorerDomain: 'api-sepolia.etherscan.io',
     explorerBrowserDomain: 'sepolia.etherscan.io',
     usdcAddress: '0x1c7D4B196Cb0C7B01d743Fbc6116a902379C7238',
-    isDev: true,
+    isTestNet: true,
     mailerAddress: '0x8de9c081a31cbb14a5974b6b4a04aa8502a796f7',
     startingBlock: 9531686,
   },
@@ -48,7 +48,7 @@ export const CHAIN_INFO_MAP: Record<Chain, ChainInfo> = {
     explorerDomain: 'api-goerli.etherscan.io',
     explorerBrowserDomain: 'goerli.etherscan.io',
     usdcAddress: '0x07865c6E87B9F70255377e024ace6630C1Eaa37F',
-    isDev: true,
+    isTestNet: true,
   },
 
   // Polygon
@@ -62,7 +62,7 @@ export const CHAIN_INFO_MAP: Record<Chain, ChainInfo> = {
     explorerDomain: 'api.polygonscan.com',
     explorerBrowserDomain: 'polygonscan.com',
     usdcAddress: '0x3c499c542cEF5E3811e1192ce70d8cC03d5c3359',
-    isDev: false,
+    isTestNet: false,
   },
   [Chain.POLYGON_MUMBAI]: {
     chainType: ChainType.EVM,
@@ -74,7 +74,7 @@ export const CHAIN_INFO_MAP: Record<Chain, ChainInfo> = {
     explorerDomain: 'api-testnet.polygonscan.com',
     explorerBrowserDomain: 'mumbai.polygonscan.com',
     usdcAddress: '0x9999f7Fea5938fD3b1E26A12c3f2fb024e194f97',
-    isDev: true,
+    isTestNet: true,
   },
   [Chain.POLYGON_AMOY]: {
     chainType: ChainType.EVM,
@@ -86,7 +86,7 @@ export const CHAIN_INFO_MAP: Record<Chain, ChainInfo> = {
     explorerDomain: 'api-amoy.polygonscan.com',
     explorerBrowserDomain: 'amoy.polygonscan.com',
     usdcAddress: '0x41E94Eb019C0762f9Bfcf9Fb1E58725BfB0e7582',
-    isDev: true,
+    isTestNet: true,
   },
 
   // Optimism
@@ -100,7 +100,7 @@ export const CHAIN_INFO_MAP: Record<Chain, ChainInfo> = {
     explorerDomain: 'api-optimistic.etherscan.io',
     explorerBrowserDomain: 'optimistic.etherscan.io',
     usdcAddress: '0x0b2C639c533813f4Aa9D7837CAf62653d097Ff85',
-    isDev: false,
+    isTestNet: false,
   },
   [Chain.OPTIMISM_SEPOLIA]: {
     chainType: ChainType.EVM,
@@ -112,7 +112,7 @@ export const CHAIN_INFO_MAP: Record<Chain, ChainInfo> = {
     explorerDomain: 'api-sepolia-optimistic.etherscan.io',
     explorerBrowserDomain: 'sepolia-optimistic.etherscan.io',
     usdcAddress: '0x5fd84259d66Cd46123540766Be93DFE6D43130D7',
-    isDev: true,
+    isTestNet: true,
   },
   [Chain.OPTIMISM_GOERLI]: {
     chainType: ChainType.EVM,
@@ -124,7 +124,7 @@ export const CHAIN_INFO_MAP: Record<Chain, ChainInfo> = {
     explorerDomain: 'api-goerli-optimistic.etherscan.io',
     explorerBrowserDomain: 'goerli-optimistic.etherscan.io',
     usdcAddress: '0xe05606174bac4A6364B31bd0eCA4bf4dD368f8C6',
-    isDev: true,
+    isTestNet: true,
   },
 
   // Arbitrum
@@ -138,7 +138,7 @@ export const CHAIN_INFO_MAP: Record<Chain, ChainInfo> = {
     explorerDomain: 'api.arbiscan.io',
     explorerBrowserDomain: 'arbiscan.io',
     usdcAddress: '0xaf88d065e77c8cC2239327C5EDb3A432268e5831',
-    isDev: false,
+    isTestNet: false,
   },
   [Chain.ARBITRUM_SEPOLIA]: {
     chainType: ChainType.EVM,
@@ -150,7 +150,7 @@ export const CHAIN_INFO_MAP: Record<Chain, ChainInfo> = {
     explorerDomain: 'api-sepolia.arbiscan.io',
     explorerBrowserDomain: 'sepolia.arbiscan.io',
     usdcAddress: '0x75faf114eafb1BDbe2F0316DF893fd58CE46AA4d',
-    isDev: true,
+    isTestNet: true,
   },
   [Chain.ARBITRUM_GOERLI]: {
     chainType: ChainType.EVM,
@@ -162,7 +162,7 @@ export const CHAIN_INFO_MAP: Record<Chain, ChainInfo> = {
     explorerDomain: 'api-goerli.arbiscan.io',
     explorerBrowserDomain: 'goerli.arbiscan.io',
     usdcAddress: '0xfd064A18f3BF249cf1f87FC203E90D8f650f2d63',
-    isDev: true,
+    isTestNet: true,
   },
 
   // Base
@@ -176,7 +176,7 @@ export const CHAIN_INFO_MAP: Record<Chain, ChainInfo> = {
     explorerDomain: 'api.basescan.org',
     explorerBrowserDomain: 'basescan.org',
     usdcAddress: '0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913',
-    isDev: false,
+    isTestNet: false,
   },
   [Chain.BASE_SEPOLIA]: {
     chainType: ChainType.EVM,
@@ -188,7 +188,7 @@ export const CHAIN_INFO_MAP: Record<Chain, ChainInfo> = {
     explorerDomain: 'api-sepolia.basescan.org',
     explorerBrowserDomain: 'sepolia.basescan.org',
     usdcAddress: '0x036CbD53842c5426634e7929541eC2318f3dCF7e',
-    isDev: true,
+    isTestNet: true,
   },
   [Chain.BASE_GOERLI]: {
     chainType: ChainType.EVM,
@@ -200,7 +200,7 @@ export const CHAIN_INFO_MAP: Record<Chain, ChainInfo> = {
     explorerDomain: 'api-goerli.basescan.org',
     explorerBrowserDomain: 'goerli.basescan.org',
     usdcAddress: '0xF175520C52418dfE19C8098071a252da48Cd1C19',
-    isDev: true,
+    isTestNet: true,
   },
 
   // Avalanche
@@ -214,7 +214,7 @@ export const CHAIN_INFO_MAP: Record<Chain, ChainInfo> = {
     explorerDomain: 'api.snowtrace.io',
     explorerBrowserDomain: 'snowtrace.io',
     usdcAddress: '0xB97EF9Ef8734C71904D8002F8b6Bc66Dd9c48a6E',
-    isDev: false,
+    isTestNet: false,
   },
   [Chain.AVALANCHE_FUJI]: {
     chainType: ChainType.EVM,
@@ -226,7 +226,7 @@ export const CHAIN_INFO_MAP: Record<Chain, ChainInfo> = {
     explorerDomain: 'api-testnet.snowtrace.io',
     explorerBrowserDomain: 'testnet.snowtrace.io',
     usdcAddress: '0x5425890298aed601595a70AB815c96711a31Bc65',
-    isDev: true,
+    isTestNet: true,
   },
 
   // BNB Chain
@@ -240,7 +240,7 @@ export const CHAIN_INFO_MAP: Record<Chain, ChainInfo> = {
     explorerDomain: 'api.bscscan.com',
     explorerBrowserDomain: 'bscscan.com',
     usdcAddress: '0x8AC76a51cc950d9822D68b83fE1Ad97B32Cd580d',
-    isDev: false,
+    isTestNet: false,
   },
   [Chain.BNB_TESTNET]: {
     chainType: ChainType.EVM,
@@ -252,7 +252,7 @@ export const CHAIN_INFO_MAP: Record<Chain, ChainInfo> = {
     explorerDomain: 'api-testnet.bscscan.com',
     explorerBrowserDomain: 'testnet.bscscan.com',
     usdcAddress: '0x64544969ed7EBf5f083679233325356EbE738930',
-    isDev: true,
+    isTestNet: true,
   },
 
   // Gnosis Chain
@@ -266,7 +266,7 @@ export const CHAIN_INFO_MAP: Record<Chain, ChainInfo> = {
     explorerDomain: 'api.gnosisscan.io',
     explorerBrowserDomain: 'gnosisscan.io',
     usdcAddress: '0xDDAfbb505ad214D7b80b1f830fcCc89B60fb7A83',
-    isDev: false,
+    isTestNet: false,
   },
   [Chain.GNOSIS_CHIADO]: {
     chainType: ChainType.EVM,
@@ -278,7 +278,7 @@ export const CHAIN_INFO_MAP: Record<Chain, ChainInfo> = {
     explorerDomain: 'api-chiado.gnosisscan.io',
     explorerBrowserDomain: 'gnosis-chiado.blockscout.com',
     usdcAddress: undefined,
-    isDev: true,
+    isTestNet: true,
   },
 
   // Celo
@@ -292,7 +292,7 @@ export const CHAIN_INFO_MAP: Record<Chain, ChainInfo> = {
     explorerDomain: 'api.celoscan.io',
     explorerBrowserDomain: 'celoscan.io',
     usdcAddress: '0xcebA9300f2b948710d2653dD7B07f33A8B32118C',
-    isDev: false,
+    isTestNet: false,
   },
   [Chain.CELO_ALFAJORES]: {
     chainType: ChainType.EVM,
@@ -304,7 +304,7 @@ export const CHAIN_INFO_MAP: Record<Chain, ChainInfo> = {
     explorerDomain: 'api-alfajores.celoscan.io',
     explorerBrowserDomain: 'alfajores.celoscan.io',
     usdcAddress: '0x2F25deB3848C207fc8E0c34035B3Ba7fC157602B',
-    isDev: true,
+    isTestNet: true,
   },
 
   // zkSync
@@ -318,7 +318,7 @@ export const CHAIN_INFO_MAP: Record<Chain, ChainInfo> = {
     explorerDomain: 'api-era.zksync.network',
     explorerBrowserDomain: 'explorer.zksync.io',
     usdcAddress: '0x1d17CBcF0D6D143135aE902365D2E5e2A16538D4',
-    isDev: false,
+    isTestNet: false,
   },
   [Chain.ZKSYNC_SEPOLIA]: {
     chainType: ChainType.EVM,
@@ -330,7 +330,7 @@ export const CHAIN_INFO_MAP: Record<Chain, ChainInfo> = {
     explorerDomain: 'api-sepolia-era.zksync.network',
     explorerBrowserDomain: 'sepolia.explorer.zksync.io',
     usdcAddress: undefined,
-    isDev: true,
+    isTestNet: true,
   },
 
   // Linea
@@ -344,7 +344,7 @@ export const CHAIN_INFO_MAP: Record<Chain, ChainInfo> = {
     explorerDomain: 'api.lineascan.build',
     explorerBrowserDomain: 'lineascan.build',
     usdcAddress: '0x176211869cA2b568f2A7D4EE941E073a821EE1ff',
-    isDev: false,
+    isTestNet: false,
   },
   [Chain.LINEA_SEPOLIA]: {
     chainType: ChainType.EVM,
@@ -356,7 +356,7 @@ export const CHAIN_INFO_MAP: Record<Chain, ChainInfo> = {
     explorerDomain: 'api-sepolia.lineascan.build',
     explorerBrowserDomain: 'sepolia.lineascan.build',
     usdcAddress: undefined,
-    isDev: true,
+    isTestNet: true,
   },
 
   // Scroll
@@ -370,7 +370,7 @@ export const CHAIN_INFO_MAP: Record<Chain, ChainInfo> = {
     explorerDomain: 'api.scrollscan.com',
     explorerBrowserDomain: 'scrollscan.com',
     usdcAddress: '0x06eFdBFf2a14a7c8E15944D1F4A48F9F95F663A4',
-    isDev: false,
+    isTestNet: false,
   },
   [Chain.SCROLL_SEPOLIA]: {
     chainType: ChainType.EVM,
@@ -382,7 +382,7 @@ export const CHAIN_INFO_MAP: Record<Chain, ChainInfo> = {
     explorerDomain: 'api-sepolia.scrollscan.com',
     explorerBrowserDomain: 'sepolia.scrollscan.com',
     usdcAddress: undefined,
-    isDev: true,
+    isTestNet: true,
   },
 
   // Monad
@@ -396,7 +396,7 @@ export const CHAIN_INFO_MAP: Record<Chain, ChainInfo> = {
     explorerDomain: undefined,
     explorerBrowserDomain: 'explorer.monad.xyz',
     usdcAddress: undefined,
-    isDev: false,
+    isTestNet: false,
   },
   [Chain.MONAD_TESTNET]: {
     chainType: ChainType.EVM,
@@ -408,7 +408,7 @@ export const CHAIN_INFO_MAP: Record<Chain, ChainInfo> = {
     explorerDomain: undefined,
     explorerBrowserDomain: 'testnet.explorer.monad.xyz',
     usdcAddress: undefined,
-    isDev: true,
+    isTestNet: true,
   },
 
   // Story Protocol
@@ -422,7 +422,7 @@ export const CHAIN_INFO_MAP: Record<Chain, ChainInfo> = {
     explorerDomain: undefined,
     explorerBrowserDomain: 'explorer.story.foundation',
     usdcAddress: undefined,
-    isDev: false,
+    isTestNet: false,
   },
   [Chain.STORY_TESTNET]: {
     chainType: ChainType.EVM,
@@ -434,7 +434,7 @@ export const CHAIN_INFO_MAP: Record<Chain, ChainInfo> = {
     explorerDomain: undefined,
     explorerBrowserDomain: 'testnet.explorer.story.foundation',
     usdcAddress: undefined,
-    isDev: true,
+    isTestNet: true,
   },
 
   // Plume Network
@@ -448,7 +448,7 @@ export const CHAIN_INFO_MAP: Record<Chain, ChainInfo> = {
     explorerDomain: undefined,
     explorerBrowserDomain: 'explorer.plumenetwork.xyz',
     usdcAddress: '0x222365EF19F7947e5484218551B56bb3965Aa7aF',
-    isDev: false,
+    isTestNet: false,
   },
   [Chain.PLUME_TESTNET]: {
     chainType: ChainType.EVM,
@@ -460,7 +460,7 @@ export const CHAIN_INFO_MAP: Record<Chain, ChainInfo> = {
     explorerDomain: undefined,
     explorerBrowserDomain: 'testnet.explorer.plumenetwork.xyz',
     usdcAddress: '0xcB5f30e335672893c7eb944B374c196392C19D18',
-    isDev: true,
+    isTestNet: true,
   },
 
   // Nexus
@@ -474,7 +474,7 @@ export const CHAIN_INFO_MAP: Record<Chain, ChainInfo> = {
     explorerDomain: undefined,
     explorerBrowserDomain: 'explorer.nexus.xyz',
     usdcAddress: undefined,
-    isDev: false,
+    isTestNet: false,
   },
   [Chain.NEXUS_TESTNET]: {
     chainType: ChainType.EVM,
@@ -486,7 +486,7 @@ export const CHAIN_INFO_MAP: Record<Chain, ChainInfo> = {
     explorerDomain: undefined,
     explorerBrowserDomain: 'testnet.explorer.nexus.xyz',
     usdcAddress: undefined,
-    isDev: true,
+    isTestNet: true,
   },
 
   // HyperEVM
@@ -500,7 +500,7 @@ export const CHAIN_INFO_MAP: Record<Chain, ChainInfo> = {
     explorerDomain: undefined,
     explorerBrowserDomain: 'app.hyperliquid.xyz/explorer',
     usdcAddress: '0xb88339CB7199b77E23DB6E890353E22632Ba630f',
-    isDev: false,
+    isTestNet: false,
   },
   [Chain.HYPEREVM_TESTNET]: {
     chainType: ChainType.EVM,
@@ -512,7 +512,7 @@ export const CHAIN_INFO_MAP: Record<Chain, ChainInfo> = {
     explorerDomain: undefined,
     explorerBrowserDomain: 'app.hyperliquid-testnet.xyz/explorer',
     usdcAddress: '0x2B3370eE501B4a559b57D449569354196457D8Ab',
-    isDev: true,
+    isTestNet: true,
   },
 
   // Sonic
@@ -526,7 +526,7 @@ export const CHAIN_INFO_MAP: Record<Chain, ChainInfo> = {
     explorerDomain: undefined,
     explorerBrowserDomain: 'sonicscan.org',
     usdcAddress: '0x29219dd400f2Bf60E5a23d13Be72B486D4038894',
-    isDev: false,
+    isTestNet: false,
   },
   [Chain.SONIC_TESTNET]: {
     chainType: ChainType.EVM,
@@ -538,7 +538,7 @@ export const CHAIN_INFO_MAP: Record<Chain, ChainInfo> = {
     explorerDomain: undefined,
     explorerBrowserDomain: 'testnet.sonicscan.org',
     usdcAddress: '0x0BA304580ee7c9a980CF72e55f5Ed2E9fd30Bc51',
-    isDev: true,
+    isTestNet: true,
   },
   [Chain.SONIC_BLAZE]: {
     chainType: ChainType.EVM,
@@ -550,7 +550,7 @@ export const CHAIN_INFO_MAP: Record<Chain, ChainInfo> = {
     explorerDomain: undefined,
     explorerBrowserDomain: 'blaze.sonicscan.org',
     usdcAddress: '0xA4879Fed32Ecbef99399e5cbC247E533421C4eC6',
-    isDev: true,
+    isTestNet: true,
   },
 
   // Unichain
@@ -564,7 +564,7 @@ export const CHAIN_INFO_MAP: Record<Chain, ChainInfo> = {
     explorerDomain: undefined,
     explorerBrowserDomain: 'uniscan.xyz',
     usdcAddress: '0x078D782b760474a361dDA0AF3839290b0EF57AD6',
-    isDev: false,
+    isTestNet: false,
   },
   [Chain.UNICHAIN_SEPOLIA]: {
     chainType: ChainType.EVM,
@@ -576,7 +576,7 @@ export const CHAIN_INFO_MAP: Record<Chain, ChainInfo> = {
     explorerDomain: undefined,
     explorerBrowserDomain: 'sepolia.uniscan.xyz',
     usdcAddress: '0x31d0220469e10c4E71834a79b1f276E153D00a2D',
-    isDev: true,
+    isTestNet: true,
   },
 
   // World Chain
@@ -590,7 +590,7 @@ export const CHAIN_INFO_MAP: Record<Chain, ChainInfo> = {
     explorerDomain: undefined,
     explorerBrowserDomain: 'worldscan.org',
     usdcAddress: '0x79A02482A880bCe3F13E09da970dC34dB4cD24D1',
-    isDev: false,
+    isTestNet: false,
   },
 
   // XDC Network
@@ -604,7 +604,7 @@ export const CHAIN_INFO_MAP: Record<Chain, ChainInfo> = {
     explorerDomain: undefined,
     explorerBrowserDomain: 'xdcscan.io',
     usdcAddress: undefined,
-    isDev: false,
+    isTestNet: false,
   },
 
   // Ink
@@ -618,7 +618,7 @@ export const CHAIN_INFO_MAP: Record<Chain, ChainInfo> = {
     explorerDomain: undefined,
     explorerBrowserDomain: 'explorer.inkonchain.com',
     usdcAddress: '0xFabab97dCE620294D2B0b0e46C68964e326300Ac',
-    isDev: true,
+    isTestNet: true,
   },
 
   // Fetch.ai
@@ -632,7 +632,7 @@ export const CHAIN_INFO_MAP: Record<Chain, ChainInfo> = {
     explorerDomain: undefined,
     explorerBrowserDomain: 'explore.fetch.ai',
     usdcAddress: undefined,
-    isDev: false,
+    isTestNet: false,
   },
   [Chain.FETCH_TESTNET]: {
     chainType: ChainType.EVM,
@@ -644,7 +644,7 @@ export const CHAIN_INFO_MAP: Record<Chain, ChainInfo> = {
     explorerDomain: undefined,
     explorerBrowserDomain: 'explore-testnet.fetch.ai',
     usdcAddress: undefined,
-    isDev: true,
+    isTestNet: true,
   },
 
   // Gensyn
@@ -658,7 +658,7 @@ export const CHAIN_INFO_MAP: Record<Chain, ChainInfo> = {
     explorerDomain: undefined,
     explorerBrowserDomain: 'explorer.gensyn.ai',
     usdcAddress: undefined,
-    isDev: false,
+    isTestNet: false,
   },
   [Chain.GENSYN_TESTNET]: {
     chainType: ChainType.EVM,
@@ -670,7 +670,7 @@ export const CHAIN_INFO_MAP: Record<Chain, ChainInfo> = {
     explorerDomain: undefined,
     explorerBrowserDomain: 'testnet.explorer.gensyn.ai',
     usdcAddress: undefined,
-    isDev: true,
+    isTestNet: true,
   },
 
   // Ritual
@@ -684,7 +684,7 @@ export const CHAIN_INFO_MAP: Record<Chain, ChainInfo> = {
     explorerDomain: undefined,
     explorerBrowserDomain: 'explorer.ritual.net',
     usdcAddress: undefined,
-    isDev: false,
+    isTestNet: false,
   },
   [Chain.RITUAL_TESTNET]: {
     chainType: ChainType.EVM,
@@ -696,7 +696,7 @@ export const CHAIN_INFO_MAP: Record<Chain, ChainInfo> = {
     explorerDomain: undefined,
     explorerBrowserDomain: 'testnet.explorer.ritual.net',
     usdcAddress: undefined,
-    isDev: true,
+    isTestNet: true,
   },
 
   // Solana
@@ -710,7 +710,7 @@ export const CHAIN_INFO_MAP: Record<Chain, ChainInfo> = {
     explorerDomain: undefined,
     explorerBrowserDomain: 'explorer.solana.com',
     usdcAddress: 'EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v',
-    isDev: false,
+    isTestNet: false,
   },
   [Chain.SOLANA_DEVNET]: {
     chainType: ChainType.SOLANA,
@@ -722,7 +722,7 @@ export const CHAIN_INFO_MAP: Record<Chain, ChainInfo> = {
     explorerDomain: undefined,
     explorerBrowserDomain: 'explorer.solana.com/?cluster=devnet',
     usdcAddress: '4zMMC9srt5Ri5X14GAgXhaHii3GnPAEERYPJgZJDncDU',
-    isDev: true,
+    isTestNet: true,
   },
   [Chain.SOLANA_TESTNET]: {
     chainType: ChainType.SOLANA,
@@ -734,7 +734,7 @@ export const CHAIN_INFO_MAP: Record<Chain, ChainInfo> = {
     explorerDomain: undefined,
     explorerBrowserDomain: 'explorer.solana.com/?cluster=testnet',
     usdcAddress: '4zMMC9srt5Ri5X14GAgXhaHii3GnPAEERYPJgZJDncDU',
-    isDev: true,
+    isTestNet: true,
   },
 
   // Local development
@@ -748,7 +748,7 @@ export const CHAIN_INFO_MAP: Record<Chain, ChainInfo> = {
     explorerDomain: undefined,
     explorerBrowserDomain: undefined,
     usdcAddress: '0x0000000000000000000000000000000000000000',
-    isDev: true,
+    isTestNet: true,
   },
   [Chain.SOLANA_LOCAL]: {
     chainType: ChainType.SOLANA,
@@ -760,6 +760,6 @@ export const CHAIN_INFO_MAP: Record<Chain, ChainInfo> = {
     explorerDomain: undefined,
     explorerBrowserDomain: undefined,
     usdcAddress: '11111111111111111111111111111111',
-    isDev: true,
+    isTestNet: true,
   },
 };

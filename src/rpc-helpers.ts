@@ -68,7 +68,7 @@ export interface ChainInfo {
   /** USDC contract address (EVM) or mint address (Solana) (undefined if not available) */
   usdcAddress: Optional<string>;
   /** Whether this is a development/testnet chain (true) or mainnet/production chain (false) */
-  isDev: boolean;
+  isTestNet: boolean;
   /** Optional deployed mailer contract address (EVM chains only) */
   mailerAddress?: string;
   /** Optional block number where the mailer contract was deployed (used for event indexing) */
@@ -219,29 +219,37 @@ export class RpcHelpers {
 
   /**
    * Get the list of visible chains for the application
-   * @param chainType - Filter by chain type (EVM or Solana)
-   * @param isDev - Whether to include development/testnet chains (true) or production chains (false)
+   * @param chainType - Optional filter by chain type (EVM or Solana). Defaults to undefined (all types).
+   * @param includesTestNet - If true, include both mainnet and testnet chains. If false, only include mainnet chains (isTestNet = false). Defaults to true.
    * @returns Array of ChainInfo objects for chains that match the filters and have a mailer contract deployed
    * @example
    * ```typescript
-   * // Get production EVM chains with mailer contracts
+   * // Get all chains (all types, both mainnet and testnet) with mailer contracts - using defaults
+   * const allChains = RpcHelpers.getVisibleChains();
+   * // Returns: ChainInfo[] with all chains that have mailerAddress set
+   *
+   * // Get only mainnet EVM chains with mailer contracts
    * const prodEvmChains = RpcHelpers.getVisibleChains(ChainType.EVM, false);
    * // Returns: ChainInfo[] with only mainnet EVM chains that have mailerAddress set
    *
-   * // Get development EVM chains with mailer contracts
-   * const devEvmChains = RpcHelpers.getVisibleChains(ChainType.EVM, true);
-   * // Returns: ChainInfo[] with only testnet EVM chains that have mailerAddress set
+   * // Get all EVM chains (both mainnet and testnet) with mailer contracts
+   * const allEvmChains = RpcHelpers.getVisibleChains(ChainType.EVM);
+   * // Returns: ChainInfo[] with both mainnet and testnet EVM chains that have mailerAddress set
    *
-   * // Get production Solana chains with mailer contracts
+   * // Get only mainnet Solana chains with mailer contracts
    * const prodSolanaChains = RpcHelpers.getVisibleChains(ChainType.SOLANA, false);
    * // Returns: ChainInfo[] with only mainnet Solana chains that have mailerAddress set
+   *
+   * // Get all mainnet chains (both EVM and Solana) with mailer contracts
+   * const allMainnetChains = RpcHelpers.getVisibleChains(undefined, false);
+   * // Returns: ChainInfo[] with only mainnet chains (all types) that have mailerAddress set
    * ```
    */
-  static getVisibleChains(chainType: ChainType, isDev: boolean): ChainInfo[] {
+  static getVisibleChains(chainType?: ChainType, includesTestNet: boolean = true): ChainInfo[] {
     return Object.values(CHAIN_INFO_MAP).filter(
       (info) =>
-        info.chainType === chainType &&
-        info.isDev === isDev &&
+        (chainType === undefined || info.chainType === chainType) &&
+        (includesTestNet || !info.isTestNet) &&
         info.mailerAddress !== undefined
     );
   }
