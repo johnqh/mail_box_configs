@@ -1,6 +1,6 @@
 {
   "name": "@sudobility/configs",
-  "version": "0.0.15",
+  "version": "0.0.16",
   "description": "Configuration utilities and RPC helpers for the 0xmail.box Web3 email ecosystem",
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",

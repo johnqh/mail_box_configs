@@ -114,12 +114,114 @@ describe('RpcHelpers', () => {
   });
 
   describe('getChainInfo', () => {
-    it('should return complete chain info', () => {
+    it('should return complete chain info for valid chain', () => {
       const info = RpcHelpers.getChainInfo(Chain.ETH_MAINNET);
-      expect(info.chainType).toBe(ChainType.EVM);
-      expect(info.chainId).toBe(1);
-      expect(info.name).toBe('Ethereum');
-      expect(info.usdcAddress).toBe('0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48');
+      expect(info).toBeDefined();
+      expect(info?.chainType).toBe(ChainType.EVM);
+      expect(info?.chainId).toBe(1);
+      expect(info?.name).toBe('Ethereum');
+      expect(info?.usdcAddress).toBe('0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48');
+    });
+
+    it('should return complete chain info for Polygon', () => {
+      const info = RpcHelpers.getChainInfo(Chain.POLYGON_MAINNET);
+      expect(info).toBeDefined();
+      expect(info?.chainType).toBe(ChainType.EVM);
+      expect(info?.chainId).toBe(137);
+      expect(info?.name).toBe('Polygon');
+    });
+
+    it('should return complete chain info for Solana', () => {
+      const info = RpcHelpers.getChainInfo(Chain.SOLANA_MAINNET);
+      expect(info).toBeDefined();
+      expect(info?.chainType).toBe(ChainType.SOLANA);
+      expect(info?.chainId).toBe(-101);
+      expect(info?.name).toBe('Solana');
+    });
+
+    it('should return undefined for unknown chain', () => {
+      const info = RpcHelpers.getChainInfo('UNKNOWN_CHAIN' as Chain);
+      expect(info).toBeUndefined();
+    });
+
+    it('should return undefined for invalid chain value', () => {
+      const info = RpcHelpers.getChainInfo(999 as unknown as Chain);
+      expect(info).toBeUndefined();
+    });
+  });
+
+  describe('getChainInfoById', () => {
+    it('should return complete chain info for Ethereum chain ID', () => {
+      const info = RpcHelpers.getChainInfoById(1);
+      expect(info).toBeDefined();
+      expect(info?.chainType).toBe(ChainType.EVM);
+      expect(info?.chainId).toBe(1);
+      expect(info?.name).toBe('Ethereum');
+      expect(info?.usdcAddress).toBe('0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48');
+    });
+
+    it('should return complete chain info for Polygon chain ID', () => {
+      const info = RpcHelpers.getChainInfoById(137);
+      expect(info).toBeDefined();
+      expect(info?.chainType).toBe(ChainType.EVM);
+      expect(info?.chainId).toBe(137);
+      expect(info?.name).toBe('Polygon');
+    });
+
+    it('should return complete chain info for Base chain ID', () => {
+      const info = RpcHelpers.getChainInfoById(8453);
+      expect(info).toBeDefined();
+      expect(info?.chainType).toBe(ChainType.EVM);
+      expect(info?.chainId).toBe(8453);
+      expect(info?.name).toBe('Base');
+    });
+
+    it('should return complete chain info for Arbitrum chain ID', () => {
+      const info = RpcHelpers.getChainInfoById(42161);
+      expect(info).toBeDefined();
+      expect(info?.chainType).toBe(ChainType.EVM);
+      expect(info?.chainId).toBe(42161);
+      expect(info?.name).toBe('Arbitrum');
+    });
+
+    it('should return complete chain info for Solana chain ID', () => {
+      const info = RpcHelpers.getChainInfoById(-101);
+      expect(info).toBeDefined();
+      expect(info?.chainType).toBe(ChainType.SOLANA);
+      expect(info?.chainId).toBe(-101);
+      expect(info?.name).toBe('Solana');
+      expect(info?.usdcAddress).toBe('EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v');
+    });
+
+    it('should return undefined for unknown chain ID', () => {
+      const info = RpcHelpers.getChainInfoById(999999);
+      expect(info).toBeUndefined();
+    });
+
+    it('should return undefined for invalid negative chain ID', () => {
+      const info = RpcHelpers.getChainInfoById(-999);
+      expect(info).toBeUndefined();
+    });
+
+    it('should return undefined for zero chain ID', () => {
+      const info = RpcHelpers.getChainInfoById(0);
+      expect(info).toBeUndefined();
+    });
+
+    it('should distinguish between different chains with similar IDs', () => {
+      const eth = RpcHelpers.getChainInfoById(1);
+      const polygon = RpcHelpers.getChainInfoById(137);
+
+      expect(eth?.name).toBe('Ethereum');
+      expect(polygon?.name).toBe('Polygon');
+      expect(eth?.chainId).not.toBe(polygon?.chainId);
+    });
+
+    it('should work for testnet chains', () => {
+      const sepolia = RpcHelpers.getChainInfoById(11155111);
+      expect(sepolia).toBeDefined();
+      expect(sepolia?.name).toBe('Ethereum Sepolia');
+      expect(sepolia?.isTestNet).toBe(true);
     });
   });
 

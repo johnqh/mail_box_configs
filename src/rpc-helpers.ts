@@ -114,7 +114,7 @@ export class RpcHelpers {
    * ```
    */
   static getChainType(chain: Chain): ChainType {
-    const info = CHAIN_INFO_MAP[chain];
+    const info = this.getChainInfo(chain);
     if (!info) {
       throw new Error(`Unknown chain: ${chain}`);
     }
@@ -124,8 +124,7 @@ export class RpcHelpers {
   /**
    * Get complete static chain information
    * @param chain - Chain identifier
-   * @returns ChainInfo object containing all static chain metadata
-   * @throws Error if the chain is not recognized
+   * @returns ChainInfo object containing all static chain metadata, or undefined if the chain is not recognized
    * @example
    * ```typescript
    * const info = RpcHelpers.getChainInfo(Chain.ETH_MAINNET);
@@ -140,12 +139,39 @@ export class RpcHelpers {
    * // }
    * ```
    */
-  static getChainInfo(chain: Chain): ChainInfo {
-    const info = CHAIN_INFO_MAP[chain];
-    if (!info) {
-      throw new Error(`Unknown chain: ${chain}`);
-    }
-    return info;
+  static getChainInfo(chain: Chain): Optional<ChainInfo> {
+    return CHAIN_INFO_MAP[chain];
+  }
+
+  /**
+   * Get complete static chain information by chain ID
+   * @param chainId - Numeric chain ID (positive for EVM, negative for Solana)
+   * @returns ChainInfo object containing all static chain metadata, or undefined if the chain ID is not recognized
+   * @example
+   * ```typescript
+   * const info = RpcHelpers.getChainInfoById(1);
+   * // Returns: {
+   * //   chainType: ChainType.EVM,
+   * //   chainId: 1,
+   * //   name: 'Ethereum',
+   * //   alchemyNetwork: 'eth-mainnet',
+   * //   explorerDomain: 'api.etherscan.io',
+   * //   explorerBrowserDomain: 'etherscan.io',
+   * //   usdcAddress: '0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48'
+   * // }
+   *
+   * const polygonInfo = RpcHelpers.getChainInfoById(137);
+   * // Returns ChainInfo for Polygon
+   *
+   * const solanaInfo = RpcHelpers.getChainInfoById(-101);
+   * // Returns ChainInfo for Solana Mainnet
+   *
+   * const unknown = RpcHelpers.getChainInfoById(999999);
+   * // Returns: undefined
+   * ```
+   */
+  static getChainInfoById(chainId: number): Optional<ChainInfo> {
+    return Object.values(CHAIN_INFO_MAP).find((info) => info.chainId === chainId);
   }
 
   /**
@@ -169,14 +195,17 @@ export class RpcHelpers {
    * ```
    */
   static getChainId(chain: Chain): number {
-    return this.getChainInfo(chain).chainId;
+    const info = this.getChainInfo(chain);
+    if (!info) {
+      throw new Error(`Unknown chain: ${chain}`);
+    }
+    return info.chainId;
   }
 
   /**
    * Get the USDC address/mint for a given chain
    * @param chain - Chain identifier
-   * @returns USDC contract address for EVM chains, or mint address for Solana chains, or undefined if not available
-   * @throws Error if the chain is not recognized
+   * @returns USDC contract address for EVM chains, or mint address for Solana chains, or undefined if not available or chain is not recognized
    * @example
    * ```typescript
    * const ethUSDC = RpcHelpers.getUSDCAddress(Chain.ETH_MAINNET);
@@ -190,7 +219,8 @@ export class RpcHelpers {
    * ```
    */
   static getUSDCAddress(chain: Chain): Optional<string> {
-    return this.getChainInfo(chain).usdcAddress;
+    const info = this.getChainInfo(chain);
+    return info?.usdcAddress;
   }
 
   /**
@@ -214,7 +244,11 @@ export class RpcHelpers {
    * ```
    */
   static getUserFriendlyName(chain: Chain): string {
-    return this.getChainInfo(chain).name;
+    const info = this.getChainInfo(chain);
+    if (!info) {
+      throw new Error(`Unknown chain: ${chain}`);
+    }
+    return info.name;
   }
 
   /**
@@ -350,6 +384,10 @@ export class RpcHelpers {
     }
 
     const chainInfo = this.getChainInfo(chain);
+    if (!chainInfo) {
+      return undefined;
+    }
+
     const network = chainInfo.alchemyNetwork;
     if (!network) {
       return undefined;
@@ -383,6 +421,10 @@ export class RpcHelpers {
     }
 
     const chainInfo = this.getChainInfo(chain);
+    if (!chainInfo) {
+      return undefined;
+    }
+
     const network = chainInfo.ankrNetwork;
     if (!network) {
       return undefined;
@@ -416,6 +458,10 @@ export class RpcHelpers {
     }
 
     const chainInfo = this.getChainInfo(chain);
+    if (!chainInfo) {
+      return undefined;
+    }
+
     const network = chainInfo.metamaskNetwork;
     if (!network) {
       return undefined;
@@ -555,6 +601,10 @@ export class RpcHelpers {
     }
 
     const chainInfo = this.getChainInfo(chain);
+    if (!chainInfo) {
+      return undefined;
+    }
+
     if (chainInfo.chainType === ChainType.SOLANA) {
       return undefined;
     }
@@ -587,6 +637,10 @@ export class RpcHelpers {
    */
   static getBlockExplorerUrl(chain: Chain): Optional<string> {
     const chainInfo = this.getChainInfo(chain);
+    if (!chainInfo) {
+      return undefined;
+    }
+
     const domain = chainInfo.explorerBrowserDomain;
     if (!domain) {
       return undefined;
