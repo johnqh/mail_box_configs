@@ -13,6 +13,7 @@ import type { ChainInfo } from './rpc-helpers';
 export const CHAIN_INFO_MAP: Record<Chain, ChainInfo> = {
   // Ethereum
   [Chain.ETH_MAINNET]: {
+    chain: Chain.ETH_MAINNET,
     chainType: ChainType.EVM,
     chainId: 1,
     name: 'Ethereum',
@@ -25,6 +26,7 @@ export const CHAIN_INFO_MAP: Record<Chain, ChainInfo> = {
     isTestNet: false,
   },
   [Chain.ETH_SEPOLIA]: {
+    chain: Chain.ETH_SEPOLIA,
     chainType: ChainType.EVM,
     chainId: 11155111,
     name: 'Ethereum Sepolia',
@@ -39,6 +41,7 @@ export const CHAIN_INFO_MAP: Record<Chain, ChainInfo> = {
     startingBlock: 9531686,
   },
   [Chain.ETH_GOERLI]: {
+    chain: Chain.ETH_GOERLI,
     chainType: ChainType.EVM,
     chainId: 5,
     name: 'Ethereum Goerli',
@@ -53,6 +56,7 @@ export const CHAIN_INFO_MAP: Record<Chain, ChainInfo> = {
 
   // Polygon
   [Chain.POLYGON_MAINNET]: {
+    chain: Chain.POLYGON_MAINNET,
     chainType: ChainType.EVM,
     chainId: 137,
     name: 'Polygon',
@@ -65,6 +69,7 @@ export const CHAIN_INFO_MAP: Record<Chain, ChainInfo> = {
     isTestNet: false,
   },
   [Chain.POLYGON_MUMBAI]: {
+    chain: Chain.POLYGON_MUMBAI,
     chainType: ChainType.EVM,
     chainId: 80001,
     name: 'Polygon Mumbai',
@@ -77,6 +82,7 @@ export const CHAIN_INFO_MAP: Record<Chain, ChainInfo> = {
     isTestNet: true,
   },
   [Chain.POLYGON_AMOY]: {
+    chain: Chain.POLYGON_AMOY,
     chainType: ChainType.EVM,
     chainId: 80002,
     name: 'Polygon Amoy',
@@ -91,6 +97,7 @@ export const CHAIN_INFO_MAP: Record<Chain, ChainInfo> = {
 
   // Optimism
   [Chain.OPTIMISM_MAINNET]: {
+    chain: Chain.OPTIMISM_MAINNET,
     chainType: ChainType.EVM,
     chainId: 10,
     name: 'Optimism',
@@ -103,6 +110,7 @@ export const CHAIN_INFO_MAP: Record<Chain, ChainInfo> = {
     isTestNet: false,
   },
   [Chain.OPTIMISM_SEPOLIA]: {
+    chain: Chain.OPTIMISM_SEPOLIA,
     chainType: ChainType.EVM,
     chainId: 11155420,
     name: 'Optimism Sepolia',
@@ -115,6 +123,7 @@ export const CHAIN_INFO_MAP: Record<Chain, ChainInfo> = {
     isTestNet: true,
   },
   [Chain.OPTIMISM_GOERLI]: {
+    chain: Chain.OPTIMISM_GOERLI,
     chainType: ChainType.EVM,
     chainId: 420,
     name: 'Optimism Goerli',
@@ -129,6 +138,7 @@ export const CHAIN_INFO_MAP: Record<Chain, ChainInfo> = {
 
   // Arbitrum
   [Chain.ARBITRUM_MAINNET]: {
+    chain: Chain.ARBITRUM_MAINNET,
     chainType: ChainType.EVM,
     chainId: 42161,
     name: 'Arbitrum',
@@ -141,6 +151,7 @@ export const CHAIN_INFO_MAP: Record<Chain, ChainInfo> = {
     isTestNet: false,
   },
   [Chain.ARBITRUM_SEPOLIA]: {
+    chain: Chain.ARBITRUM_SEPOLIA,
     chainType: ChainType.EVM,
     chainId: 421614,
     name: 'Arbitrum Sepolia',
@@ -153,6 +164,7 @@ export const CHAIN_INFO_MAP: Record<Chain, ChainInfo> = {
     isTestNet: true,
   },
   [Chain.ARBITRUM_GOERLI]: {
+    chain: Chain.ARBITRUM_GOERLI,
     chainType: ChainType.EVM,
     chainId: 421613,
     name: 'Arbitrum Goerli',
@@ -167,6 +179,7 @@ export const CHAIN_INFO_MAP: Record<Chain, ChainInfo> = {
 
   // Base
   [Chain.BASE_MAINNET]: {
+    chain: Chain.BASE_MAINNET,
     chainType: ChainType.EVM,
     chainId: 8453,
     name: 'Base',
@@ -179,6 +192,7 @@ export const CHAIN_INFO_MAP: Record<Chain, ChainInfo> = {
     isTestNet: false,
   },
   [Chain.BASE_SEPOLIA]: {
+    chain: Chain.BASE_SEPOLIA,
     chainType: ChainType.EVM,
     chainId: 84532,
     name: 'Base Sepolia',
@@ -191,6 +205,7 @@ export const CHAIN_INFO_MAP: Record<Chain, ChainInfo> = {
     isTestNet: true,
   },
   [Chain.BASE_GOERLI]: {
+    chain: Chain.BASE_GOERLI,
     chainType: ChainType.EVM,
     chainId: 84531,
     name: 'Base Goerli',
@@ -205,6 +220,7 @@ export const CHAIN_INFO_MAP: Record<Chain, ChainInfo> = {
 
   // Avalanche
   [Chain.AVALANCHE_MAINNET]: {
+    chain: Chain.AVALANCHE_MAINNET,
     chainType: ChainType.EVM,
     chainId: 43114,
     name: 'Avalanche',
@@ -217,6 +233,7 @@ export const CHAIN_INFO_MAP: Record<Chain, ChainInfo> = {
     isTestNet: false,
   },
   [Chain.AVALANCHE_FUJI]: {
+    chain: Chain.AVALANCHE_FUJI,
     chainType: ChainType.EVM,
     chainId: 43113,
     name: 'Avalanche Fuji',
@@ -231,6 +248,7 @@ export const CHAIN_INFO_MAP: Record<Chain, ChainInfo> = {
 
   // BNB Chain
   [Chain.BNB_MAINNET]: {
+    chain: Chain.BNB_MAINNET,
     chainType: ChainType.EVM,
     chainId: 56,
     name: 'BNB Chain',
@@ -243,6 +261,7 @@ export const CHAIN_INFO_MAP: Record<Chain, ChainInfo> = {
     isTestNet: false,
   },
   [Chain.BNB_TESTNET]: {
+    chain: Chain.BNB_TESTNET,
     chainType: ChainType.EVM,
     chainId: 97,
     name: 'BNB Chain Testnet',
@@ -257,6 +276,7 @@ export const CHAIN_INFO_MAP: Record<Chain, ChainInfo> = {
 
   // Gnosis Chain
   [Chain.GNOSIS_MAINNET]: {
+    chain: Chain.GNOSIS_MAINNET,
     chainType: ChainType.EVM,
     chainId: 100,
     name: 'Gnosis',
@@ -269,6 +289,7 @@ export const CHAIN_INFO_MAP: Record<Chain, ChainInfo> = {
     isTestNet: false,
   },
   [Chain.GNOSIS_CHIADO]: {
+    chain: Chain.GNOSIS_CHIADO,
     chainType: ChainType.EVM,
     chainId: 10200,
     name: 'Gnosis Chiado',
@@ -283,6 +304,7 @@ export const CHAIN_INFO_MAP: Record<Chain, ChainInfo> = {
 
   // Celo
   [Chain.CELO_MAINNET]: {
+    chain: Chain.CELO_MAINNET,
     chainType: ChainType.EVM,
     chainId: 42220,
     name: 'Celo',
@@ -295,6 +317,7 @@ export const CHAIN_INFO_MAP: Record<Chain, ChainInfo> = {
     isTestNet: false,
   },
   [Chain.CELO_ALFAJORES]: {
+    chain: Chain.CELO_ALFAJORES,
     chainType: ChainType.EVM,
     chainId: 44787,
     name: 'Celo Alfajores',
@@ -309,6 +332,7 @@ export const CHAIN_INFO_MAP: Record<Chain, ChainInfo> = {
 
   // zkSync
   [Chain.ZKSYNC_MAINNET]: {
+    chain: Chain.ZKSYNC_MAINNET,
     chainType: ChainType.EVM,
     chainId: 324,
     name: 'zkSync',
@@ -321,6 +345,7 @@ export const CHAIN_INFO_MAP: Record<Chain, ChainInfo> = {
     isTestNet: false,
   },
   [Chain.ZKSYNC_SEPOLIA]: {
+    chain: Chain.ZKSYNC_SEPOLIA,
     chainType: ChainType.EVM,
     chainId: 300,
     name: 'zkSync Sepolia',
@@ -335,6 +360,7 @@ export const CHAIN_INFO_MAP: Record<Chain, ChainInfo> = {
 
   // Linea
   [Chain.LINEA_MAINNET]: {
+    chain: Chain.LINEA_MAINNET,
     chainType: ChainType.EVM,
     chainId: 59144,
     name: 'Linea',
@@ -347,6 +373,7 @@ export const CHAIN_INFO_MAP: Record<Chain, ChainInfo> = {
     isTestNet: false,
   },
   [Chain.LINEA_SEPOLIA]: {
+    chain: Chain.LINEA_SEPOLIA,
     chainType: ChainType.EVM,
     chainId: 59141,
     name: 'Linea Sepolia',
@@ -361,6 +388,7 @@ export const CHAIN_INFO_MAP: Record<Chain, ChainInfo> = {
 
   // Scroll
   [Chain.SCROLL_MAINNET]: {
+    chain: Chain.SCROLL_MAINNET,
     chainType: ChainType.EVM,
     chainId: 534352,
     name: 'Scroll',
@@ -373,6 +401,7 @@ export const CHAIN_INFO_MAP: Record<Chain, ChainInfo> = {
     isTestNet: false,
   },
   [Chain.SCROLL_SEPOLIA]: {
+    chain: Chain.SCROLL_SEPOLIA,
     chainType: ChainType.EVM,
     chainId: 534351,
     name: 'Scroll Sepolia',
@@ -387,6 +416,7 @@ export const CHAIN_INFO_MAP: Record<Chain, ChainInfo> = {
 
   // Monad
   [Chain.MONAD_MAINNET]: {
+    chain: Chain.MONAD_MAINNET,
     chainType: ChainType.EVM,
     chainId: 10000,
     name: 'Monad',
@@ -399,6 +429,7 @@ export const CHAIN_INFO_MAP: Record<Chain, ChainInfo> = {
     isTestNet: false,
   },
   [Chain.MONAD_TESTNET]: {
+    chain: Chain.MONAD_TESTNET,
     chainType: ChainType.EVM,
     chainId: 10001,
     name: 'Monad Testnet',
@@ -413,6 +444,7 @@ export const CHAIN_INFO_MAP: Record<Chain, ChainInfo> = {
 
   // Story Protocol
   [Chain.STORY_MAINNET]: {
+    chain: Chain.STORY_MAINNET,
     chainType: ChainType.EVM,
     chainId: 1516,
     name: 'Story',
@@ -425,6 +457,7 @@ export const CHAIN_INFO_MAP: Record<Chain, ChainInfo> = {
     isTestNet: false,
   },
   [Chain.STORY_TESTNET]: {
+    chain: Chain.STORY_TESTNET,
     chainType: ChainType.EVM,
     chainId: 1513,
     name: 'Story Testnet',
@@ -439,6 +472,7 @@ export const CHAIN_INFO_MAP: Record<Chain, ChainInfo> = {
 
   // Plume Network
   [Chain.PLUME_MAINNET]: {
+    chain: Chain.PLUME_MAINNET,
     chainType: ChainType.EVM,
     chainId: 98865,
     name: 'Plume',
@@ -451,6 +485,7 @@ export const CHAIN_INFO_MAP: Record<Chain, ChainInfo> = {
     isTestNet: false,
   },
   [Chain.PLUME_TESTNET]: {
+    chain: Chain.PLUME_TESTNET,
     chainType: ChainType.EVM,
     chainId: 98864,
     name: 'Plume Testnet',
@@ -465,6 +500,7 @@ export const CHAIN_INFO_MAP: Record<Chain, ChainInfo> = {
 
   // Nexus
   [Chain.NEXUS_MAINNET]: {
+    chain: Chain.NEXUS_MAINNET,
     chainType: ChainType.EVM,
     chainId: 9999,
     name: 'Nexus',
@@ -477,6 +513,7 @@ export const CHAIN_INFO_MAP: Record<Chain, ChainInfo> = {
     isTestNet: false,
   },
   [Chain.NEXUS_TESTNET]: {
+    chain: Chain.NEXUS_TESTNET,
     chainType: ChainType.EVM,
     chainId: 9998,
     name: 'Nexus Testnet',
@@ -491,6 +528,7 @@ export const CHAIN_INFO_MAP: Record<Chain, ChainInfo> = {
 
   // HyperEVM
   [Chain.HYPEREVM_MAINNET]: {
+    chain: Chain.HYPEREVM_MAINNET,
     chainType: ChainType.EVM,
     chainId: 998,
     name: 'HyperEVM',
@@ -503,6 +541,7 @@ export const CHAIN_INFO_MAP: Record<Chain, ChainInfo> = {
     isTestNet: false,
   },
   [Chain.HYPEREVM_TESTNET]: {
+    chain: Chain.HYPEREVM_TESTNET,
     chainType: ChainType.EVM,
     chainId: 997,
     name: 'HyperEVM Testnet',
@@ -517,6 +556,7 @@ export const CHAIN_INFO_MAP: Record<Chain, ChainInfo> = {
 
   // Sonic
   [Chain.SONIC_MAINNET]: {
+    chain: Chain.SONIC_MAINNET,
     chainType: ChainType.EVM,
     chainId: 146,
     name: 'Sonic',
@@ -529,6 +569,7 @@ export const CHAIN_INFO_MAP: Record<Chain, ChainInfo> = {
     isTestNet: false,
   },
   [Chain.SONIC_TESTNET]: {
+    chain: Chain.SONIC_TESTNET,
     chainType: ChainType.EVM,
     chainId: 64165,
     name: 'Sonic Testnet',
@@ -541,6 +582,7 @@ export const CHAIN_INFO_MAP: Record<Chain, ChainInfo> = {
     isTestNet: true,
   },
   [Chain.SONIC_BLAZE]: {
+    chain: Chain.SONIC_BLAZE,
     chainType: ChainType.EVM,
     chainId: 57054,
     name: 'Sonic Blaze',
@@ -555,6 +597,7 @@ export const CHAIN_INFO_MAP: Record<Chain, ChainInfo> = {
 
   // Unichain
   [Chain.UNICHAIN_MAINNET]: {
+    chain: Chain.UNICHAIN_MAINNET,
     chainType: ChainType.EVM,
     chainId: 1,
     name: 'Unichain',
@@ -567,6 +610,7 @@ export const CHAIN_INFO_MAP: Record<Chain, ChainInfo> = {
     isTestNet: false,
   },
   [Chain.UNICHAIN_SEPOLIA]: {
+    chain: Chain.UNICHAIN_SEPOLIA,
     chainType: ChainType.EVM,
     chainId: 1301,
     name: 'Unichain Sepolia',
@@ -581,6 +625,7 @@ export const CHAIN_INFO_MAP: Record<Chain, ChainInfo> = {
 
   // World Chain
   [Chain.WORLD_MAINNET]: {
+    chain: Chain.WORLD_MAINNET,
     chainType: ChainType.EVM,
     chainId: 480,
     name: 'World Chain',
@@ -595,6 +640,7 @@ export const CHAIN_INFO_MAP: Record<Chain, ChainInfo> = {
 
   // XDC Network
   [Chain.XDC_MAINNET]: {
+    chain: Chain.XDC_MAINNET,
     chainType: ChainType.EVM,
     chainId: 50,
     name: 'XDC Network',
@@ -609,6 +655,7 @@ export const CHAIN_INFO_MAP: Record<Chain, ChainInfo> = {
 
   // Ink
   [Chain.INK_TESTNET]: {
+    chain: Chain.INK_TESTNET,
     chainType: ChainType.EVM,
     chainId: 763373,
     name: 'Ink Testnet',
@@ -623,6 +670,7 @@ export const CHAIN_INFO_MAP: Record<Chain, ChainInfo> = {
 
   // Fetch.ai
   [Chain.FETCH_MAINNET]: {
+    chain: Chain.FETCH_MAINNET,
     chainType: ChainType.EVM,
     chainId: 2154,
     name: 'Fetch.ai',
@@ -635,6 +683,7 @@ export const CHAIN_INFO_MAP: Record<Chain, ChainInfo> = {
     isTestNet: false,
   },
   [Chain.FETCH_TESTNET]: {
+    chain: Chain.FETCH_TESTNET,
     chainType: ChainType.EVM,
     chainId: 2153,
     name: 'Fetch.ai Testnet',
@@ -649,6 +698,7 @@ export const CHAIN_INFO_MAP: Record<Chain, ChainInfo> = {
 
   // Gensyn
   [Chain.GENSYN_MAINNET]: {
+    chain: Chain.GENSYN_MAINNET,
     chainType: ChainType.EVM,
     chainId: 8888,
     name: 'Gensyn',
@@ -661,6 +711,7 @@ export const CHAIN_INFO_MAP: Record<Chain, ChainInfo> = {
     isTestNet: false,
   },
   [Chain.GENSYN_TESTNET]: {
+    chain: Chain.GENSYN_TESTNET,
     chainType: ChainType.EVM,
     chainId: 8887,
     name: 'Gensyn Testnet',
@@ -675,6 +726,7 @@ export const CHAIN_INFO_MAP: Record<Chain, ChainInfo> = {
 
   // Ritual
   [Chain.RITUAL_MAINNET]: {
+    chain: Chain.RITUAL_MAINNET,
     chainType: ChainType.EVM,
     chainId: 7777,
     name: 'Ritual',
@@ -687,6 +739,7 @@ export const CHAIN_INFO_MAP: Record<Chain, ChainInfo> = {
     isTestNet: false,
   },
   [Chain.RITUAL_TESTNET]: {
+    chain: Chain.RITUAL_TESTNET,
     chainType: ChainType.EVM,
     chainId: 7776,
     name: 'Ritual Testnet',
@@ -701,6 +754,7 @@ export const CHAIN_INFO_MAP: Record<Chain, ChainInfo> = {
 
   // Solana
   [Chain.SOLANA_MAINNET]: {
+    chain: Chain.SOLANA_MAINNET,
     chainType: ChainType.SOLANA,
     chainId: -101,
     name: 'Solana',
@@ -713,6 +767,7 @@ export const CHAIN_INFO_MAP: Record<Chain, ChainInfo> = {
     isTestNet: false,
   },
   [Chain.SOLANA_DEVNET]: {
+    chain: Chain.SOLANA_DEVNET,
     chainType: ChainType.SOLANA,
     chainId: -102,
     name: 'Solana Devnet',
@@ -725,6 +780,7 @@ export const CHAIN_INFO_MAP: Record<Chain, ChainInfo> = {
     isTestNet: true,
   },
   [Chain.SOLANA_TESTNET]: {
+    chain: Chain.SOLANA_TESTNET,
     chainType: ChainType.SOLANA,
     chainId: -103,
     name: 'Solana Testnet',
@@ -739,6 +795,7 @@ export const CHAIN_INFO_MAP: Record<Chain, ChainInfo> = {
 
   // Local development
   [Chain.EVM_LOCAL]: {
+    chain: Chain.EVM_LOCAL,
     chainType: ChainType.EVM,
     chainId: 31337,
     name: 'Local EVM',
@@ -751,6 +808,7 @@ export const CHAIN_INFO_MAP: Record<Chain, ChainInfo> = {
     isTestNet: true,
   },
   [Chain.SOLANA_LOCAL]: {
+    chain: Chain.SOLANA_LOCAL,
     chainType: ChainType.SOLANA,
     chainId: -104,
     name: 'Local Solana',

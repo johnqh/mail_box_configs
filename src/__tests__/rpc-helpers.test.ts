@@ -97,6 +97,10 @@ describe('RpcHelpers', () => {
     it('should return correct chain type for Solana chains', () => {
       expect(RpcHelpers.getChainType(Chain.SOLANA_MAINNET)).toBe(ChainType.SOLANA);
     });
+
+    it('should return undefined for unknown chain', () => {
+      expect(RpcHelpers.getChainType('UNKNOWN_CHAIN' as Chain)).toBeUndefined();
+    });
   });
 
   describe('getChainId', () => {
@@ -110,6 +114,10 @@ describe('RpcHelpers', () => {
 
     it('should return negative chain ID for Solana', () => {
       expect(RpcHelpers.getChainId(Chain.SOLANA_MAINNET)).toBe(-101);
+    });
+
+    it('should return undefined for unknown chain', () => {
+      expect(RpcHelpers.getChainId('UNKNOWN_CHAIN' as Chain)).toBeUndefined();
     });
   });
 
@@ -229,6 +237,10 @@ describe('RpcHelpers', () => {
     it('should return correct display name', () => {
       expect(RpcHelpers.getUserFriendlyName(Chain.ETH_MAINNET)).toBe('Ethereum');
       expect(RpcHelpers.getUserFriendlyName(Chain.POLYGON_MAINNET)).toBe('Polygon');
+    });
+
+    it('should return undefined for unknown chain', () => {
+      expect(RpcHelpers.getUserFriendlyName('UNKNOWN_CHAIN' as Chain)).toBeUndefined();
     });
   });
 

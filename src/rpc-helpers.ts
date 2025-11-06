@@ -49,6 +49,8 @@ export interface ApiKeys {
  * Contains all static metadata about a blockchain network
  */
 export interface ChainInfo {
+  /** Chain identifier from Chain enum */
+  chain: Chain;
   /** Chain type (EVM or Solana) */
   chainType: ChainType;
   /** Numeric chain ID (positive for EVM, negative for Solana) */
@@ -102,8 +104,7 @@ export class RpcHelpers {
   /**
    * Get the chain type (EVM or Solana) for a given chain
    * @param chain - Chain identifier
-   * @returns ChainType.EVM or ChainType.SOLANA
-   * @throws Error if the chain is not recognized
+   * @returns ChainType.EVM or ChainType.SOLANA, or undefined if the chain is not recognized
    * @example
    * ```typescript
    * const type = RpcHelpers.getChainType(Chain.ETH_MAINNET);
@@ -111,14 +112,14 @@ export class RpcHelpers {
    *
    * const solanaType = RpcHelpers.getChainType(Chain.SOLANA_MAINNET);
    * // Returns: ChainType.SOLANA
+   *
+   * const unknown = RpcHelpers.getChainType('UNKNOWN' as Chain);
+   * // Returns: undefined
    * ```
    */
-  static getChainType(chain: Chain): ChainType {
+  static getChainType(chain: Chain): Optional<ChainType> {
     const info = this.getChainInfo(chain);
-    if (!info) {
-      throw new Error(`Unknown chain: ${chain}`);
-    }
-    return info.chainType;
+    return info?.chainType;
   }
 
   /**
@@ -177,8 +178,7 @@ export class RpcHelpers {
   /**
    * Get the chain ID for a given chain
    * @param chain - Chain identifier
-   * @returns Numeric chain ID for EVM chains, or negative ID for Solana chains
-   * @throws Error if the chain is not recognized or has no chain ID
+   * @returns Numeric chain ID for EVM chains, or negative ID for Solana chains, or undefined if the chain is not recognized
    * @example
    * ```typescript
    * const ethChainId = RpcHelpers.getChainId(Chain.ETH_MAINNET);
@@ -192,14 +192,14 @@ export class RpcHelpers {
    *
    * const localChainId = RpcHelpers.getChainId(Chain.EVM_LOCAL);
    * // Returns: 31337
+   *
+   * const unknown = RpcHelpers.getChainId('UNKNOWN' as Chain);
+   * // Returns: undefined
    * ```
    */
-  static getChainId(chain: Chain): number {
+  static getChainId(chain: Chain): Optional<number> {
     const info = this.getChainInfo(chain);
-    if (!info) {
-      throw new Error(`Unknown chain: ${chain}`);
-    }
-    return info.chainId;
+    return info?.chainId;
   }
 
   /**
@@ -226,8 +226,7 @@ export class RpcHelpers {
   /**
    * Get the user-friendly display name for a chain
    * @param chain - Chain identifier
-   * @returns Human-readable chain name
-   * @throws Error if the chain is not recognized
+   * @returns Human-readable chain name, or undefined if the chain is not recognized
    * @example
    * ```typescript
    * const ethName = RpcHelpers.getUserFriendlyName(Chain.ETH_MAINNET);
@@ -241,14 +240,14 @@ export class RpcHelpers {
    *
    * const localName = RpcHelpers.getUserFriendlyName(Chain.EVM_LOCAL);
    * // Returns: 'Local EVM'
+   *
+   * const unknown = RpcHelpers.getUserFriendlyName('UNKNOWN' as Chain);
+   * // Returns: undefined
    * ```
    */
-  static getUserFriendlyName(chain: Chain): string {
+  static getUserFriendlyName(chain: Chain): Optional<string> {
     const info = this.getChainInfo(chain);
-    if (!info) {
-      throw new Error(`Unknown chain: ${chain}`);
-    }
-    return info.name;
+    return info?.name;
   }
 
   /**
