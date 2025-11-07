@@ -37,8 +37,8 @@ export const CHAIN_INFO_MAP: Record<Chain, ChainInfo> = {
     explorerBrowserDomain: 'sepolia.etherscan.io',
     usdcAddress: '0x1c7D4B196Cb0C7B01d743Fbc6116a902379C7238',
     isTestNet: true,
-    mailerAddress: '0x8de9c081a31cbb14a5974b6b4a04aa8502a796f7',
-    startingBlock: 9531686,
+    mailerAddress: '0xb5f69709c8b1bf5413add7acba44c2d4b00728a8',
+    startingBlock: 9581750,
   },
   [Chain.ETH_GOERLI]: {
     chain: Chain.ETH_GOERLI,
