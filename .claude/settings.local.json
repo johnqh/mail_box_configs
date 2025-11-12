@@ -3,7 +3,17 @@
     "allow": [
       "Bash(git push:*)",
       "Bash(npm install)",
-      "Bash(npm outdated:*)"
+      "Bash(npm outdated:*)",
+      "Bash(npm view:*)",
+      "Bash(npm run verify:*)",
+      "Bash(npm run clean:*)",
+      "Bash(npm run build:*)",
+      "Bash(npm search:*)",
+      "Bash(git add:*)",
+      "Bash(git commit -m \"$(cat <<''EOF''\nBump version to 0.0.12 and update @sudobility/types to 1.9.2\n\n- Update @sudobility/types from 1.9.1 to 1.9.2\n- All checks pass: typecheck, lint, tests, build\n\n🤖 Generated with [Claude Code](https://claude.com/claude-code)\n\nCo-Authored-By: Claude <noreply@anthropic.com>\nEOF\n)\")",
+      "Bash(npm test)",
+      "Bash(npm run typecheck:*)",
+      "Bash(npm run lint)"
     ],
     "deny": [],
     "ask": []
