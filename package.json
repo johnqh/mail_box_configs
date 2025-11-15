@@ -1,6 +1,6 @@
 {
   "name": "@sudobility/configs",
-  "version": "0.0.23",
+  "version": "0.0.24",
   "description": "Configuration utilities and RPC helpers for the 0xmail.box Web3 email ecosystem",
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
@@ -46,7 +46,7 @@
   },
   "devDependencies": {
     "@eslint/js": "^9.38.0",
-    "@sudobility/types": "^1.9.10",
+    "@sudobility/types": "^1.9.11",
     "@types/node": "^24.9.1",
     "@typescript-eslint/eslint-plugin": "^8.46.2",
     "@typescript-eslint/parser": "^8.46.2",
