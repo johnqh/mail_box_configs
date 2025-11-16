@@ -1,7 +1,7 @@
 {
   "name": "@sudobility/configs",
   "version": "0.0.24",
-  "description": "Configuration utilities and RPC helpers for the 0xmail.box Web3 email ecosystem",
+  "description": "Configuration utilities and RPC helpers for Web3 email ecosystem",
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
   "exports": {
@@ -35,18 +35,17 @@
     "config",
     "rpc",
     "blockchain",
-    "0xmail",
     "web3",
     "email"
   ],
-  "author": "0xmail.box",
+  "author": "sudobility",
   "license": "MIT",
   "peerDependencies": {
     "@sudobility/types": "^1.9.4"
   },
   "devDependencies": {
     "@eslint/js": "^9.38.0",
-    "@sudobility/types": "^1.9.11",
+    "@sudobility/types": "^1.9.12",
     "@types/node": "^24.9.1",
     "@typescript-eslint/eslint-plugin": "^8.46.2",
     "@typescript-eslint/parser": "^8.46.2",

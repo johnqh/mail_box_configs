@@ -1,5 +1,5 @@
 /**
- * @sudobility/configs - Configuration utilities for the 0xmail.box Web3 email ecosystem
+ * @sudobility/configs - Configuration utilities for Web3 email ecosystem
  *
  * This package provides RPC helpers and chain configuration utilities for
  * building blockchain applications compatible with React, React Native, and Node.js.
