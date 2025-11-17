@@ -1,6 +1,6 @@
 {
   "name": "@sudobility/configs",
-  "version": "0.0.24",
+  "version": "0.0.25",
   "description": "Configuration utilities and RPC helpers for Web3 email ecosystem",
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",

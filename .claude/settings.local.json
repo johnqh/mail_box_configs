@@ -13,7 +13,8 @@
       "Bash(git commit -m \"$(cat <<''EOF''\nBump version to 0.0.12 and update @sudobility/types to 1.9.2\n\n- Update @sudobility/types from 1.9.1 to 1.9.2\n- All checks pass: typecheck, lint, tests, build\n\n🤖 Generated with [Claude Code](https://claude.com/claude-code)\n\nCo-Authored-By: Claude <noreply@anthropic.com>\nEOF\n)\")",
       "Bash(npm test)",
       "Bash(npm run typecheck:*)",
-      "Bash(npm run lint)"
+      "Bash(npm run lint)",
+      "Bash(npm install:*)"
     ],
     "deny": [],
     "ask": []
