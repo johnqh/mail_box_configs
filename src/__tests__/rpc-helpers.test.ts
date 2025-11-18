@@ -374,12 +374,13 @@ describe('RpcHelpers', () => {
       expect(url).toBe('https://arbitrum-mainnet.infura.io/v3/test-metamask-key');
     });
 
-    it('should return undefined when API key is missing', () => {
+    it('should fallback to available provider when preferred API key is missing', () => {
       const apiKeys: ApiKeys = {
         alchemyApiKey: 'test-alchemy-key',
       };
       const url = RpcHelpers.getRpcUrl(apiKeys, Chain.ETH_MAINNET, RpcEndpoint.Ankr);
-      expect(url).toBeUndefined();
+      // Should fallback to Alchemy since Ankr is not available
+      expect(url).toBe('https://eth-mainnet.g.alchemy.com/v2/test-alchemy-key');
     });
 
     it('should return undefined for unsupported chain/provider combinations', () => {
