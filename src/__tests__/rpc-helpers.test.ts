@@ -460,6 +460,70 @@ describe('RpcHelpers', () => {
       const url = RpcHelpers.getRpcUrl(apiKeys, Chain.MONAD_MAINNET);
       expect(url).toBeUndefined();
     });
+
+    it('should accept string "ALCHEMY" as endpoint parameter', () => {
+      const apiKeys: ApiKeys = {
+        alchemyApiKey: 'test-alchemy-key',
+        ankrApiKey: 'test-ankr-key',
+      };
+      const url = RpcHelpers.getRpcUrl(apiKeys, Chain.ETH_MAINNET, 'ALCHEMY');
+      expect(url).toBe('https://eth-mainnet.g.alchemy.com/v2/test-alchemy-key');
+    });
+
+    it('should accept string "ANKR" as endpoint parameter', () => {
+      const apiKeys: ApiKeys = {
+        alchemyApiKey: 'test-alchemy-key',
+        ankrApiKey: 'test-ankr-key',
+      };
+      const url = RpcHelpers.getRpcUrl(apiKeys, Chain.POLYGON_MAINNET, 'ANKR');
+      expect(url).toBe('https://rpc.ankr.com/polygon/test-ankr-key');
+    });
+
+    it('should accept string "METAMASK" as endpoint parameter', () => {
+      const apiKeys: ApiKeys = {
+        metamaskApiKey: 'test-metamask-key',
+        ankrApiKey: 'test-ankr-key',
+      };
+      const url = RpcHelpers.getRpcUrl(apiKeys, Chain.ARBITRUM_MAINNET, 'METAMASK');
+      expect(url).toBe('https://arbitrum-mainnet.infura.io/v3/test-metamask-key');
+    });
+
+    it('should handle lowercase string endpoint parameter', () => {
+      const apiKeys: ApiKeys = {
+        alchemyApiKey: 'test-alchemy-key',
+        ankrApiKey: 'test-ankr-key',
+      };
+      const url = RpcHelpers.getRpcUrl(apiKeys, Chain.ETH_MAINNET, 'alchemy');
+      expect(url).toBe('https://eth-mainnet.g.alchemy.com/v2/test-alchemy-key');
+    });
+
+    it('should handle mixed case string endpoint parameter', () => {
+      const apiKeys: ApiKeys = {
+        ankrApiKey: 'test-ankr-key',
+        alchemyApiKey: 'test-alchemy-key',
+      };
+      const url = RpcHelpers.getRpcUrl(apiKeys, Chain.POLYGON_MAINNET, 'AnKr');
+      expect(url).toBe('https://rpc.ankr.com/polygon/test-ankr-key');
+    });
+
+    it('should fallback to priority order for invalid string endpoint', () => {
+      const apiKeys: ApiKeys = {
+        ankrApiKey: 'test-ankr-key',
+        alchemyApiKey: 'test-alchemy-key',
+      };
+      const url = RpcHelpers.getRpcUrl(apiKeys, Chain.ETH_MAINNET, 'INVALID');
+      // Should fallback to Ankr (highest priority available)
+      expect(url).toBe('https://rpc.ankr.com/eth/test-ankr-key');
+    });
+
+    it('should fallback when string endpoint API key is unavailable', () => {
+      const apiKeys: ApiKeys = {
+        alchemyApiKey: 'test-alchemy-key',
+      };
+      const url = RpcHelpers.getRpcUrl(apiKeys, Chain.ETH_MAINNET, 'ANKR');
+      // Should fallback to Alchemy since Ankr is not available
+      expect(url).toBe('https://eth-mainnet.g.alchemy.com/v2/test-alchemy-key');
+    });
   });
 
   describe('getExplorerApiUrl', () => {
