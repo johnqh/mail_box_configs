@@ -1,6 +1,6 @@
 {
   "name": "@sudobility/configs",
-  "version": "0.0.30",
+  "version": "0.0.31",
   "description": "Configuration utilities and RPC helpers for Web3 email ecosystem",
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
@@ -45,7 +45,7 @@
   },
   "devDependencies": {
     "@eslint/js": "^9.38.0",
-    "@sudobility/types": "^1.9.16",
+    "@sudobility/types": "^1.9.17",
     "@types/node": "^24.9.1",
     "@typescript-eslint/eslint-plugin": "^8.46.2",
     "@typescript-eslint/parser": "^8.46.2",
