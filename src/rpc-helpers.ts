@@ -14,7 +14,7 @@ import { CHAIN_INFO_MAP } from './chain-info-map';
  * Blockchain API keys configuration
  */
 export interface BlockchainApis {
-  /** RPC provider API keys (Alchemy, Ankr, Metamask) */
+  /** RPC provider API keys (Alchemy, Ankr, Metamask, QuickNode) */
   apiKeys: ApiKeys;
   /** Etherscan Multichain API key for block explorer API access (EVM only) */
   etherscanApiKey: string;
@@ -30,6 +30,8 @@ export enum RpcEndpoint {
   Ankr = 'ankr',
   /** Metamask/Infura RPC endpoint */
   Metamask = 'metamask',
+  /** QuickNode RPC endpoint */
+  QuickNode = 'quicknode',
 }
 
 /**
@@ -42,6 +44,8 @@ export interface ApiKeys {
   ankrApiKey?: string;
   /** Metamask/Infura API key for RPC access (EVM only) */
   metamaskApiKey?: string;
+  /** QuickNode API key in format "subdomain:token" for RPC access (supports both EVM and Solana) */
+  quicknodeApiKey?: string;
 }
 
 /**
@@ -63,6 +67,8 @@ export interface ChainInfo {
   ankrNetwork: Optional<string>;
   /** Metamask/Infura network identifier for RPC endpoints (undefined if unsupported) */
   metamaskNetwork: Optional<string>;
+  /** QuickNode network identifier for RPC endpoints (undefined if unsupported) */
+  quicknodeNetwork: Optional<string>;
   /** Block explorer API domain (undefined for Solana and unsupported chains) */
   explorerDomain: Optional<string>;
   /** Block explorer browser domain (undefined for unsupported chains) */
@@ -472,16 +478,60 @@ export class RpcHelpers {
   }
 
   /**
+   * Build QuickNode RPC URL for any supported chain
+   *
+   * @param quicknodeApiKey - Your QuickNode API key in format "subdomain:token" (optional)
+   * @param chain - Chain identifier from Chain enum
+   * @returns Complete RPC URL, or undefined if API key is empty, invalid format, or chain is unsupported
+   *
+   * @example
+   * ```typescript
+   * const rpcUrl = RpcHelpers.getQuickNodeRpcUrl('my-endpoint:abc123token', Chain.ETH_MAINNET);
+   * // Returns: https://my-endpoint.ethereum-mainnet.quiknode.pro/abc123token/
+   *
+   * const solanaUrl = RpcHelpers.getQuickNodeRpcUrl('my-endpoint:abc123token', Chain.SOLANA_MAINNET);
+   * // Returns: https://my-endpoint.solana-mainnet.quiknode.pro/abc123token/
+   *
+   * const invalidUrl = RpcHelpers.getQuickNodeRpcUrl('', Chain.ETH_MAINNET);
+   * // Returns: undefined
+   * ```
+   */
+  static getQuickNodeRpcUrl(quicknodeApiKey: Optional<string>, chain: Chain): Optional<string> {
+    if (!quicknodeApiKey) {
+      return undefined;
+    }
+
+    const parts = quicknodeApiKey.split(':');
+    if (parts.length !== 2 || !parts[0] || !parts[1]) {
+      return undefined;
+    }
+
+    const [subdomain, token] = parts;
+
+    const chainInfo = this.getChainInfo(chain);
+    if (!chainInfo) {
+      return undefined;
+    }
+
+    const network = chainInfo.quicknodeNetwork;
+    if (!network) {
+      return undefined;
+    }
+
+    return `https://${subdomain}.${network}.quiknode.pro/${token}/`;
+  }
+
+  /**
    * Build RPC URL for any supported chain using the specified RPC provider
    *
    * This is a convenience method that routes to the appropriate provider-specific
    * function based on the endpoint parameter. If a preferred endpoint is specified
    * but its API key is not available, it will fall back to trying other providers
-   * in priority order (Ankr > Metamask > Alchemy).
+   * in priority order (QuickNode > Ankr > Metamask > Alchemy).
    *
    * @param apiKeys - API keys for all RPC providers
    * @param chain - Chain identifier from Chain enum
-   * @param endpoint - Optional preferred RPC endpoint provider. Can be RpcEndpoint enum or string ("ALCHEMY", "ANKR", "METAMASK"). If specified and available, uses that provider. If not available, falls back to priority order: Ankr > Metamask > Alchemy
+   * @param endpoint - Optional preferred RPC endpoint provider. Can be RpcEndpoint enum or string ("ALCHEMY", "ANKR", "METAMASK", "QUICKNODE"). If specified and available, uses that provider. If not available, falls back to priority order: QuickNode > Ankr > Metamask > Alchemy
    * @returns Complete RPC URL, or undefined if no API keys are available or chain is unsupported by all providers
    *
    * @example
@@ -489,7 +539,8 @@ export class RpcHelpers {
    * const apiKeys: ApiKeys = {
    *   alchemyApiKey: 'your-alchemy-key',
    *   ankrApiKey: 'your-ankr-key',
-   *   metamaskApiKey: 'your-metamask-key'
+   *   metamaskApiKey: 'your-metamask-key',
+   *   quicknodeApiKey: 'my-endpoint:abc123token'
    * };
    *
    * // With preferred endpoint available (using enum)
@@ -503,6 +554,9 @@ export class RpcHelpers {
    * const metamaskUrl = RpcHelpers.getRpcUrl(apiKeys, Chain.ARBITRUM_MAINNET, 'METAMASK');
    * // Returns: https://arbitrum-mainnet.infura.io/v3/your-metamask-key
    *
+   * const quicknodeUrl = RpcHelpers.getRpcUrl(apiKeys, Chain.ETH_MAINNET, 'QUICKNODE');
+   * // Returns: https://my-endpoint.ethereum-mainnet.quiknode.pro/abc123token/
+   *
    * // With preferred endpoint unavailable - falls back to priority order
    * const partialKeys: ApiKeys = {
    *   ankrApiKey: 'your-ankr-key'
@@ -512,7 +566,7 @@ export class RpcHelpers {
    *
    * // Without preferred endpoint - uses priority order
    * const autoUrl = RpcHelpers.getRpcUrl(apiKeys, Chain.ETH_MAINNET);
-   * // Returns: https://rpc.ankr.com/eth/your-ankr-key (Ankr has highest priority)
+   * // Returns: https://my-endpoint.ethereum-mainnet.quiknode.pro/abc123token/ (QuickNode has highest priority)
    * ```
    */
   static getRpcUrl(
@@ -533,6 +587,9 @@ export class RpcHelpers {
           break;
         case 'METAMASK':
           resolvedEndpoint = RpcEndpoint.Metamask;
+          break;
+        case 'QUICKNODE':
+          resolvedEndpoint = RpcEndpoint.QuickNode;
           break;
         default:
           // Invalid string, fall through to priority order
@@ -556,6 +613,9 @@ export class RpcHelpers {
         case RpcEndpoint.Metamask:
           preferredUrl = this.getMetamaskRpcUrl(apiKeys.metamaskApiKey, chain);
           break;
+        case RpcEndpoint.QuickNode:
+          preferredUrl = this.getQuickNodeRpcUrl(apiKeys.quicknodeApiKey, chain);
+          break;
       }
 
       // If preferred endpoint is available, use it
@@ -566,7 +626,12 @@ export class RpcHelpers {
       // Otherwise, fall through to priority order
     }
 
-    // Try providers in priority order: Ankr > Metamask > Alchemy
+    // Try providers in priority order: QuickNode > Ankr > Metamask > Alchemy
+    const quicknodeUrl = this.getQuickNodeRpcUrl(apiKeys.quicknodeApiKey, chain);
+    if (quicknodeUrl) {
+      return quicknodeUrl;
+    }
+
     const ankrUrl = this.getAnkrRpcUrl(apiKeys.ankrApiKey, chain);
     if (ankrUrl) {
       return ankrUrl;
